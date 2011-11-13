@@ -1,0 +1,30 @@
+- unless @post.comments.blank?
+  %h3
+    Комментарии к записи
+    - @post.comments.each do |comment|
+      .comments
+        .comment-header
+          = link_to_avatar(comment.user)
+          = link_to_blog(comment.user)
+          %br/
+          %span.date= comment.updated_at.strftime("%d.%m.%Y %H:%M:%S")
+        %p= comment.content
+        - if current_user == comment.user
+          = link_to "Удалить комментарий", comment, :confirm => 'Вы уверены?', :method => :delete
+%a{:name => "add_comment"}
+- if signed_in?
+  = form_for :comment, :url => comments_path do |f|
+    = f.error_messages
+    = f.hidden_field :user, :value => current_user.id if signed_in?
+    = f.hidden_field :post, :value => @post.id
+    %p
+      = f.label "Комментарий:"
+      %br/
+      = f.text_area :content
+    %p= f.submit "Создать комментарий"
+- else
+  Только зарегистрированные пользователи могут оставлять комментарии
+  %br/
+  = link_to "Войти", new_user_session_path
+  или
+  \#{link_to "Зарегистрироваться", new_user_registration_path}

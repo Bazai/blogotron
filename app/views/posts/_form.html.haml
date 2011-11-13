@@ -1,0 +1,12 @@
+= form_for @post do |f|
+  = f.error_messages :header_message => "Создать новую запись не удалось", :message => "Необходимо исправить следующие ошибки:"
+  %p
+    = f.label :subject, "Тема записи"
+    %br/
+    = f.text_field :subject
+  %p
+    = f.label :content, "Содержимое"
+    %br/
+    = f.text_area :content
+  = f.hidden_field :user, :value => current_user.id
+  %p= f.submit "Создать запись"

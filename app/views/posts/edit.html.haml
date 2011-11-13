@@ -1,0 +1,6 @@
+- title current_user.email + " | Редактирование записи"
+= render 'form'
+%p
+  = link_to "Показать", @post
+  |
+  \#{link_to "Просмотреть все записи", posts_path}

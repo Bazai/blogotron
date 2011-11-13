@@ -1,0 +1,6 @@
+ru:
+  activerecord:
+    attributes:
+      post:
+        subject: "Тема записи"
+        content: "Содержимое"

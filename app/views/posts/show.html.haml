@@ -1,0 +1,24 @@
+- title @post.user.email + " | " + @post.subject
+.post_header
+  .avatar
+    - unless @post.user.avatar.blank?
+      = image_tag @post.user.avatar
+    - else
+      =image_tag "noavatar.png"
+  .params
+    Пишет:
+    - if @post.user.blank? 
+      "Неизвестен"
+    - else
+      = link_to @post.user.email, "/blogs/" + @post.user.id.to_s
+    %br/
+    Дата: #{@post.updated_at.strftime("%d.%m.%Y %H:%M:%S")}
+%h1= @post.subject
+%p
+  = @post.content
+%p
+  - if (current_user == @post.user)
+    = link_to "Редактировать", edit_post_path(@post)
+    |
+    = link_to "Удалить", @post, :confirm => 'Вы уверены?', :method => :delete
+= render :partial => 'comments'

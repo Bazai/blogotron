@@ -1,0 +1,19 @@
+- title "Список записей"
+%p= link_to "Создать новую запись", new_post_path
+- for post in @posts
+  %table
+    %tr
+      %td Тема:
+      %td{:colspan => "2"}= post.subject
+    %tr
+      %td Содержимое:
+      %td{:colspan => "2"}= post.content
+    %tr
+      %td Автор:
+      %td{:colspan => "2"}= post.user.email
+    - if (current_user == post.user)
+      %tr
+        %td= link_to "Просмотреть", post
+        %td= link_to "Редактировать", edit_post_path(post)
+        %td= link_to "Удалить", post, :confirm => 'Вы уверены?', :method => :delete
+%p= link_to "Создать новую запись", new_post_path
