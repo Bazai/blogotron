@@ -1,3 +1,37 @@
 // Place all the styles related to the Posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+/* Тело поста*/
+.post_header {
+  display: block;
+  overflow: hidden;
+  .avatar {
+    float: left;
+    vertical-align: top;
+    margin-right: 10px;
+  }
+}
+
+/*Комментарии*/
+.comments {
+  margin-bottom: 35px;
+  .comment-header {
+    background-color: #BDF;
+    display: block;
+    overflow: hidden;
+    
+    img {
+      float: left;
+      vertical-align: top;
+      margin-right: 10px;
+    }
+    
+    a {
+      color: #3F5F9E;
+    }
+    
+    .date {
+      font-size: 9px;
+    }
+  }
+}

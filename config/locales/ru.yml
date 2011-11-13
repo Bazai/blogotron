@@ -1,6 +1,8 @@
 ru:
   activerecord:
     attributes:
+      user:
+        password: "Пароль"
       post:
         subject: "Тема записи"
         content: "Содержимое"
