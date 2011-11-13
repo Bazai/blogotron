@@ -15,13 +15,4 @@ class User < ActiveRecord::Base
   # Связи
   has_many :posts, :dependent => :destroy
   has_many :comments, :dependent => :destroy
-  
-  # def link_to_blog
-  #   link_to email, blogs_path + "/" + id.to_s
-  # end
-  
-  # def blog_url
-  #     Rails.application.routes.url_helpers.blogs_path + "/" + id.to_s
-  #   end
-  
 end

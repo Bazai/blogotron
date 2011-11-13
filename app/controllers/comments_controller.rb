@@ -42,17 +42,20 @@ class CommentsController < ApplicationController
   # POST /comments.xml
   def create
     params[:comment][:user] = User.find(params[:comment][:user])
-    post = Post.find(params[:comment][:post])
-    params[:comment][:post] = post
-    @comment = Comment.new(params[:comment])
+    @post = Post.find(params[:post_id])
+    @comment = @post.comments.new(params[:comment])
+    # params[:comment][:user] = User.find(params[:comment][:user])
+    # post = Post.find(params[:comment][:post])
+    # params[:comment][:post] = post
+    # @comment = Comment.new(params[:comment])
     # puts params[:comment].inspect
     
     if @comment.save
-      redirect_to post, :notice => "Комментарий успешно создан."
+      redirect_to @post, :notice => "Комментарий успешно создан."
     else
-      puts @comment.errors.messages.inspect
+      # puts @comment.errors.messages.inspect
       # redirect_to post, :alert => "При создании комментария возникла проблема."
-      redirect_to post, :alert => "Проблема при создании комментария: " + @comment.errors.messages[:content].first.to_s
+      redirect_to @post, :alert => "Проблема при создании комментария: " + @comment.errors.messages[:content].first.to_s
     end
   end
 

@@ -1,0 +1,13 @@
+.comments
+  .comment-header
+    - unless comment.user.avatar.blank?
+      = image_tag comment.user.avatar
+    - else
+      =image_tag "noavatar.png"
+
+    Здесь будет ссылка на блог
+    %br/
+    %span.date= comment.updated_at.strftime("%d.%m.%Y %H:%M:%S")
+  %p= comment.content
+  - if current_user == comment.user
+    = link_to "Удалить комментарий", [comment.post, comment], :confirm => 'Вы уверены?', :method => :delete

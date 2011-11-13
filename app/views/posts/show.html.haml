@@ -21,4 +21,17 @@
     = link_to "Редактировать", edit_post_path(@post)
     |
     = link_to "Удалить", @post, :confirm => 'Вы уверены?', :method => :delete
+
+- unless @post.comments.blank?
+  = render @post.comments
+  
+%a{:name => "add_comment"}
+- if signed_in?
+  = render "comments/form"
+- else
+  Только зарегистрированные пользователи могут оставлять комментарии
+  %br/
+  = link_to "Войти", new_user_session_path
+  или
+  = link_to "Зарегистрироваться", new_user_registration_path    
 / = render :partial => 'comments'
