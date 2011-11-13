@@ -1,0 +1,18 @@
+- title current_user.email + " | Редактирование данных пользователя"
+%h2
+  Редактирование данных пользователя
+  = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :multipart => true }) do |f|
+    = devise_error_messages!
+    %div
+      = f.label "Пароль"
+      %br/
+      = f.password_field :password
+    %div
+      = f.label "Подтверждение пароля"
+      %br/
+      = f.password_field :password_confirmation
+    %div= f.submit "Обновить"
+  %h3 Отменить мою учетную запись
+  %p
+    Несчастны? #{link_to "Отменить мою учетную запись", registration_path(resource_name), :confirm => "Вы уверены?", :method => :delete}.
+  = link_to "Назад", :back
