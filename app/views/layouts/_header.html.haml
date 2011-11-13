@@ -1,0 +1,31 @@
+.header
+  .feed
+    = link_to "Лента последних записей", root_path
+  .login_items
+    %ul
+      - if user_signed_in?
+        %li
+          Зашли как: = current_user.email
+        %li
+          |
+        %li
+          Профиль
+        %li
+          |
+        %li
+          Изменить пароль
+        %li
+          |
+        %li
+          Мой блог
+        %li
+          |
+        %li
+          = link_to "Выйти", destroy_user_session_path, :method => :delete
+      - else
+        %li
+          = link_to "Войти", new_user_session_path
+        %li
+          |
+        %li
+          = link_to "Зарегистрироваться", new_user_registration_path
