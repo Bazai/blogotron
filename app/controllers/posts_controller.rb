@@ -5,7 +5,13 @@ class PostsController < ApplicationController
   before_filter :authenticate_user!, :except => [:show]
   
   def index
-    @posts = Post.find_all_by_user_id(current_user)
+    unless params[:user_id].blank?
+      @user = User.find(params[:user_id])
+      render :text => @user.email
+    else
+      render :text => "Общий список"
+    end
+    # @posts = Post.find_all_by_user_id(current_user)
     # redirect_to blogs_path + "/" + current_user.id.to_s
     # redirect_to current_user.blog_url
   end
