@@ -10,7 +10,7 @@
     - if @post.user.blank? 
       "Неизвестен"
     - else
-      = link_to @post.user.email, "/blogs/" + @post.user.id.to_s
+      = link_to @post.user.email, blogs_url(@post.user)
     %br/
     Дата: #{@post.updated_at.strftime("%d.%m.%Y %H:%M:%S")}
 %h1= @post.subject

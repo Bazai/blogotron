@@ -1,0 +1,39 @@
+- title "Все записи пользователя " + @user.email
+%h2
+  Все записи пользователя: #{@user.email}
+%p
+  Всего #{@posts.count.to_s + " " + Russian.p(@posts.count, "запись", "записи", "записей")}.
+%hr/
+%br/
+.posts
+  - for post in @posts
+    .post_header
+      .avatar
+        - unless post.user.avatar.blank?
+          = image_tag post.user.avatar
+        - else
+          =image_tag "noavatar.png"
+      .params
+        Пишет: #{link_to post.user.email, blogs_url(post.user)}
+        %br/
+        Дата: #{post.updated_at.strftime("%d.%m.%Y %H:%M:%S")}
+    %h1= post.subject
+    %p
+      = post.content
+    %p
+    %p
+      / Количество комментариев
+      - if post.comments.count > 0
+        = link_to post.comments.count.to_s + " " + Russian.p(post.comments.count,"Комментарий", "Комментария", "Комментариев"), post_path(post)
+      - else
+        = link_to "Нет комментариев", post_path(post)
+      / Ссылка сразу на добавление комментария
+      | #{link_to "Добавить комментарий", post_path(post) + "#add_comment"}
+    - if (current_user == post.user)
+      = link_to "Редактировать", edit_post_path(post)
+      |
+      = link_to "Удалить", post_path(post), :confirm => 'Вы уверены?', :method => :delete
+    %hr/
+    %br/
+- if current_user == @user
+  %p= link_to "Создать новую запись", new_post_path

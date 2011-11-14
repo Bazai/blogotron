@@ -2,18 +2,21 @@
 
 class PostsController < ApplicationController
   
-  before_filter :authenticate_user!, :except => [:show]
+  before_filter :authenticate_user!, :except => [:show, :index]
   
   def index
+    # Запросили /users/:id/posts
     unless params[:user_id].blank?
       @user = User.find(params[:user_id])
-      render :text => @user.email
+      unless @user.blank?
+        @posts = Post.find_all_by_user_id(@user)
+      end
+      render "user_posts"
+    # Запросили /posts
     else
-      render :text => "Общий список"
+      @posts = Post.all(:order => "updated_at DESC")
+      render "posts_feed"
     end
-    # @posts = Post.find_all_by_user_id(current_user)
-    # redirect_to blogs_path + "/" + current_user.id.to_s
-    # redirect_to current_user.blog_url
   end
 
   def show
@@ -56,9 +59,5 @@ class PostsController < ApplicationController
     redirect_to root_path, :alert => "Только автор может удалять свои записи" unless @post.user == current_user
     @post.destroy
     redirect_to posts_url, :notice => "Запись успешно удалена."
-  end
-  
-  def add_comment
-    
   end
 end

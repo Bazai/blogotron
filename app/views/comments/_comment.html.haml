@@ -5,7 +5,7 @@
     - else
       =image_tag "noavatar.png"
 
-    Здесь будет ссылка на блог
+    = link_to comment.user.email, blogs_url(comment.user)
     %br/
     %span.date= comment.updated_at.strftime("%d.%m.%Y %H:%M:%S")
   %p= comment.content

@@ -1,7 +1,7 @@
 = form_for([@post, @post.comments.build]) do |f|
   = f.error_messages
   %p
-    = f.label :content, "Содержимое"
+    = f.label :content, "Комментарий"
     %br/
     = f.text_area :content
     = f.hidden_field :user, :value => current_user.id if signed_in?

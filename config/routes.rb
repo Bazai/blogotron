@@ -1,9 +1,6 @@
 Blogotron::Application.routes.draw do
-  get "users/index"
-
-  devise_for :users, :controllers => { :registrations => "registrations" }
   
-  root :to => 'home#index'
+  devise_for :users, :controllers => { :registrations => "registrations" }
   
   resources :users, :only => [:index] do
     resources :posts
@@ -12,6 +9,10 @@ Blogotron::Application.routes.draw do
   resources :posts do
     resources :comments
   end
+  
+  match 'blogs/:user_id' => 'posts#index', :as => :blogs
+  
+  root :to => 'posts#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
