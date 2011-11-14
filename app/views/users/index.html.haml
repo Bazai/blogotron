@@ -1,6 +1,5 @@
-%h1 Users#index
-%p Find me in app/views/users/index.html.haml
+%h1 Список всех пользователей в системе
 
 - @users.each do |user|
-  %ul
-    %li #{user.id} - #{user.email}
+  %ul(style="font-weight: bold; list-style-type: none;")
+    %li #{user.id}. #{link_to user.email, blogs_url(user)}

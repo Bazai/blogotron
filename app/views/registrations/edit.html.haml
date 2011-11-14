@@ -1,39 +1,35 @@
 - title current_user.email + " | Редактирование данных пользователя"
 %h2
   Редактирование данных пользователя
-  = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :multipart => true }) do |f|
-    = devise_error_messages!
-    %div
-      = f.label :email, "Email"
-      %br/
-      = f.email_field :email, :value => current_user.email
-    %div
-      = f.label :avatar, "Аватара"
-      %br/
-      - if current_user.avatar.url.present?
-        = image_tag(current_user.avatar)
-      - else
-        %strong Аватара не установлена. И это стыдно.
-      %br/
-      = f.file_field :avatar
-      %br/
-      = f.check_box :remove_avatar
-      = f.label :remove_avatar, "Удалить аватару:"
-      = f.hidden_field :avatar_cache
-    %div= f.submit "Обновить"
-  
-  %h2 Изменение пароля
-  = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :multipart => true }) do |f|
-    = devise_error_messages!
-    %div
-      = f.label :password, "Новый пароль"
-      %br/
-      = f.password_field :password
-    %div
-      = f.label "Подтверждение пароля"
-      %br/
-      = f.password_field :password_confirmation
-    %div= f.submit "Поменять мой пароль"
+= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :multipart => true }) do |f|
+  = devise_error_messages!
+  %div
+    = f.label :email, "Email"
+    %br/
+    = f.email_field :email, :value => current_user.email
+  %div
+    = f.label :avatar, "Аватара"
+    %br/
+    - if current_user.avatar.url.present?
+      = image_tag(current_user.avatar)
+    - else
+      %strong Аватара не установлена. И это стыдно.
+    %br/
+    = f.file_field :avatar
+    %br/
+    = f.check_box :remove_avatar
+    = f.label :remove_avatar, "Удалить аватару:"
+    = f.hidden_field :avatar_cache
+  %h2 Обязательно подтвердите действие вводом пароля
+  %div
+    = f.label :password, "Новый пароль"
+    %br/
+    = f.password_field :password
+  %div
+    = f.label "Подтверждение пароля"
+    %br/
+    = f.password_field :password_confirmation
+  %div= f.submit "Обновить"
       
   %h3 Отменить мою учетную запись
   %p
