@@ -5,16 +5,9 @@ class PostsController < ApplicationController
   before_filter :authenticate_user!, :except => [:show, :index]
   
   def index
-    # Запросили /users/:id/posts
-    unless params[:user_id].blank?
-      @user = User.find(params[:user_id])
-      unless @user.blank?
-        @posts = Post.where("user_id = #{@user.id}").ordered
-      end
-    # Запросили /posts
-    else
-      @posts = Post.ordered
-    end
+    @user = User.find(params[:user_id]) unless params[:user_id].blank?
+    # @user не пустая, значит запросили /users/:id/posts. Нет - значит запросили /posts
+    @user ? @posts = Post.where("user_id = #{@user.id}").ordered : @posts = Post.ordered
   end
 
   def show
