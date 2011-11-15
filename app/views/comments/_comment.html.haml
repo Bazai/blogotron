@@ -10,4 +10,4 @@
     %span.date= comment.updated_at.strftime("%d.%m.%Y %H:%M:%S")
   %p= comment.content
   - if current_user == comment.user
-    = link_to "Удалить комментарий", [comment.post, comment], :confirm => 'Вы уверены?', :method => :delete
+    = link_to "Удалить комментарий", comment, :confirm => 'Вы уверены?', :method => :delete

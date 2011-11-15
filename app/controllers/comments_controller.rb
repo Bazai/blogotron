@@ -1,26 +1,14 @@
 # encoding: utf-8
 
 class CommentsController < ApplicationController
-  before_filter :find_comment, :only => [:show, :edit, :update, :destroy]
-
-  def index
-    @comments = Comment.all
-  end
-
-  def show
-  end
-
-  def new
-    @comment = Comment.new
-  end
-
-  def edit
-  end
+  before_filter :authenticate_user!
+  before_filter :find_comment, :only => [:update, :destroy]
 
   def create
-    params[:comment][:user] = User.find(params[:comment][:user])
-    @post = Post.find(params[:post_id])
+    @post = current_user.posts.find(params[:post_id])
+    
     @comment = @post.comments.new(params[:comment])
+    @comment.user = current_user
     
     if @comment.save
       redirect_to @post, :notice => "Комментарий успешно создан."

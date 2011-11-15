@@ -6,8 +6,9 @@ Blogotron::Application.routes.draw do
   end
   
   resources :posts do
-    resources :comments
+    resources :comments, :only => [:create]
   end
+  resources :comments, :only => [:update, :destroy]
   
   match 'blogs/:user_id' => 'posts#index', :as => :blogs
   

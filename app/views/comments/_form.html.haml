@@ -4,6 +4,5 @@
     = f.label :content, "Комментарий"
     %br/
     = f.text_area :content
-    = f.hidden_field :user, :value => current_user.id if signed_in?
   %p
     = f.submit "Создать комментарий"
