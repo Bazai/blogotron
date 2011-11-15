@@ -3,7 +3,7 @@
 class PostsController < ApplicationController
   
   before_filter :authenticate_user!, :except => [:show, :index]
-  before_filter :find_and_check_post_owner, :only => [:edit, :update, :destroy]
+  before_filter :find_and_check_post_owner, :only => [:update, :destroy]
   
   def index
     @user = User.find(params[:user_id]) unless params[:user_id].blank?
@@ -29,6 +29,8 @@ class PostsController < ApplicationController
   end
 
   def edit
+    @post = Post.find(params[:id])
+    redirect_to root_path, :alert => "Только автор может редактировать свои записи" unless @post.user == current_user
   end
 
   def update
@@ -46,7 +48,7 @@ class PostsController < ApplicationController
   
   private
   def find_and_check_post_owner
-    @post = Post.find(params[:id])
+    @post = current_user.posts.find(params[:id])
     redirect_to root_path, :alert => "Только автор может управлять своими записями" unless @post.user == current_user
   end
 end

@@ -36,5 +36,5 @@
     = link_to "Удалить", post_path(post), :confirm => 'Вы уверены?', :method => :delete
   %hr/
   %br/
-- if (@user && current_user == @user)
+- if ((@user && current_user == @user) || (@user.blank? && signed_in?))
   %p= link_to "Создать новую запись", new_post_path
