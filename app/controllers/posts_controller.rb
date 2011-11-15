@@ -9,13 +9,11 @@ class PostsController < ApplicationController
     unless params[:user_id].blank?
       @user = User.find(params[:user_id])
       unless @user.blank?
-        @posts = Post.find_all_by_user_id(@user)
+        @posts = Post.where("user_id = #{@user.id}").ordered
       end
-      render "user_posts"
     # Запросили /posts
     else
-      @posts = Post.all(:order => "updated_at DESC")
-      render "posts_feed"
+      @posts = Post.ordered
     end
   end
 

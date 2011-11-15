@@ -8,5 +8,5 @@ class Post < ActiveRecord::Base
   validates :subject, :presence => {:message => "не может быть пустой"}
   validates :content, :presence => true
   
-  scope :ordered, :order => "updated_at ASC"
+  scope :ordered, :order => "updated_at DESC"
 end

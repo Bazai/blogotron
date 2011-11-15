@@ -2,7 +2,7 @@ Blogotron::Application.routes.draw do
   devise_for :users, :controllers => { :registrations => "registrations" }
   
   resources :users, :only => [:index] do
-    resources :posts
+    resources :posts, :only => [:index]
   end
   
   resources :posts do

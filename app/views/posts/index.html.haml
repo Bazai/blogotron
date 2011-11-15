@@ -2,6 +2,7 @@
   - title "Все записи пользователя " + @user.email
   %h2
     Все записи пользователя: #{@user.email}
+    
 %p
   Всего #{@posts.count.to_s + " " + Russian.p(@posts.count, "запись", "записи", "записей")}.
 %hr/
