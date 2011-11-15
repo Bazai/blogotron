@@ -19,9 +19,9 @@ class CommentsController < ApplicationController
 
   def update
     if @comment.update_attributes(params[:comment])
-      redirect_to @comment, :notice => "Комментарий был успешно обновлен"
+      redirect_to :back, :notice => "Комментарий был успешно обновлен"
     else
-      render :action => "edit"
+      redirect_to :back, :notice => "При удалении комментария возникла проблема"
     end
   end
 
@@ -32,7 +32,7 @@ class CommentsController < ApplicationController
 
   private
     def find_comment
-      @comment = Comment.find(params[:id])
+      @comment = current_user.comments.find(params[:id])
     end
 
 end
